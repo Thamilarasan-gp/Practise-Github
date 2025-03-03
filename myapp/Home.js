@@ -1,14 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
+import DatePicker from 'react-native-date-picker';
 
 export default function Home() {
+  const [date, setDate] = useState(new Date());
+  const [open, setOpen] = useState(false);
+
   return (
     <LinearGradient colors={['#1e3c72', '#2a5298']} style={styles.container}>
       {/* Navbar */}
       <View style={styles.navbar}>
-        <Text style={styles.navTitle}>News Appsssssss</Text>
+        <Text style={styles.navTitle}>News App</Text>
         <TouchableOpacity>
           <Ionicons name="menu" size={28} color="white" />
         </TouchableOpacity>
@@ -18,6 +23,25 @@ export default function Home() {
       <View style={styles.welcomeSection}>
         <Text style={styles.welcomeTitle}>Welcome to Daily News 📰</Text>
         <Text style={styles.welcomeSubtitle}>Stay updated with the latest headlines</Text>
+        
+        {/* Date Picker Button */}
+        <TouchableOpacity style={styles.dateButton} onPress={() => setOpen(true)}>
+          <Ionicons name="calendar" size={24} color="white" />
+          <Text style={styles.dateText}>{date.toDateString()}</Text>
+        </TouchableOpacity>
+
+        {/* Date Picker Modal */}
+        <DatePicker
+          modal
+          open={open}
+          date={date}
+          mode="date"
+          onConfirm={(selectedDate) => {
+            setOpen(false);
+            setDate(selectedDate);
+          }}
+          onCancel={() => setOpen(false)}
+        />
       </View>
 
       {/* News Feed */}
@@ -79,6 +103,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#ddd',
     marginTop: 5,
+  },
+  dateButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    padding: 10,
+    borderRadius: 10,
+    marginTop: 10,
+  },
+  dateText: {
+    color: 'white',
+    fontSize: 16,
+    marginLeft: 10,
   },
   newsFeed: {
     flex: 1,
