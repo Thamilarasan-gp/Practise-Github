@@ -8,7 +8,7 @@ export default function Home() {
     <LinearGradient colors={['#1e3c72', '#2a5298']} style={styles.container}>
       {/* Navbar */}
       <View style={styles.navbar}>
-        <Text style={styles.navTitle}>News App</Text>
+        <Text style={styles.navTitle}>News Appsssssss</Text>
         <TouchableOpacity>
           <Ionicons name="menu" size={28} color="white" />
         </TouchableOpacity>
